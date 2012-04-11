@@ -207,7 +207,7 @@ sub prune {
 	    }
 	}
 
-	delete @myinfo{'Atividade', 'UA Username'};
+	delete $myinfo{'UA Username'};
 
 	$computer->{ACCOUNTINFO}{$key} = \%myinfo;
     }
