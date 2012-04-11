@@ -1,0 +1,5 @@
+/OCS-Client-*
+*.bak
+*.old
+*.tar.gz
+*~
