@@ -1,5 +1,9 @@
 Revision history for OCS-Client. -*- text -*-
 
-\{\{$NEXT\}\}
+{{$NEXT}}
+
+Fix URI munging in constructor.
+
+0.002    2012-04-11
 
 First release.
