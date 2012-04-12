@@ -26,7 +26,8 @@ use XML::Simple;
 
 =head1 DESCRIPTION
 
-OCS is a technical management solution of IT assets. It's home page is L<http://www.ocsinventory-ng.org/en/>.
+OCS is a technical management solution of IT assets. It's home page is
+L<http://www.ocsinventory-ng.org/>.
 
 This module implements a thin Object Oriented wrapper around OCS's
 SOAP API, which is somewhat specified in
@@ -48,22 +49,20 @@ be created to talk to OCS.
 sub new {
     my ($class, $url, $user, $pass, @args) = @_;
 
-    my $URI = URI->new($url);
+    my $uri = URI->new($url);
+    $uri->path("/Apache/Ocsinventory/Interface");
 
-    my $proxy_uri = $URI->clone();
+    my $proxy = URI->new($url);
 
     my $userinfo;
     $userinfo  = $user if $user;
     $userinfo .= ':'   if $user && $pass;
     $userinfo .= $pass if $pass;
+    $proxy->userinfo($userinfo) if $userinfo;
 
-    $proxy_uri->userinfo($userinfo) if $userinfo;
+    $proxy->path("/ocsinterface\n");
 
-    my $self = {
-	soap => SOAP::Lite
-	    ->uri($URI->as_string() . "/Apache/Ocsinventory/Interface")
-		->proxy($proxy_uri->as_string() . "/ocsinterface\n", @args),
-    };
+    my $self = { soap => SOAP::Lite->uri($uri->as_string)->proxy($proxy->as_string, @args) };
 
     return bless $self, $class;
 }
