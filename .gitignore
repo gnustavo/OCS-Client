@@ -1,4 +1,5 @@
 /OCS-Client-*
+/.build/
 *.bak
 *.old
 *.tar.gz
