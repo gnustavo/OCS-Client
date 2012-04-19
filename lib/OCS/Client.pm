@@ -60,7 +60,7 @@ sub new {
     $userinfo .= $pass if $pass;
     $proxy->userinfo($userinfo) if $userinfo;
 
-    $proxy->path("/ocsinterface\n");
+    $proxy->path("/ocsinterface");
 
     my $self = { soap => SOAP::Lite->uri($uri->as_string)->proxy($proxy->as_string, @args) };
 
