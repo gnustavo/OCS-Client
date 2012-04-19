@@ -4,6 +4,9 @@ Revision history for OCS-Client. -*- text -*-
 
 0.004     2012-04-19 12:12:02 America/Sao_Paulo
 
+Define constants to make it easier to specify the CHECKSUM and WANTED
+parameters.
+
 0.003     2012-04-12 11:36:36 America/Sao_Paulo
 
 Fix URI munging in constructor.
