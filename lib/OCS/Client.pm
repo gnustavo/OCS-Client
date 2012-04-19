@@ -17,7 +17,10 @@ use XML::Simple;
 
   my $ocs = OCS::Client->new('http://ocs.example.com', 'user', 'passwd');
 
-  my @computers = $ocs->get_computers_V1(id => 123456);
+  my @computers = $ocs->get_computers_V1(
+      id       => 123456,
+      checksum => OCS::Client::HARDWARE | OCS::Client::SOFTWARE,
+  );
 
   my $next_computer = $ocs->computer_iterator(asking_for => 'META');
   while (my $meta = $next_computer->()) {
@@ -36,7 +39,7 @@ L<http://wiki.ocsinventory-ng.org/index.php/Developers:Web_services>.
 
 =head2 METHODS
 
-=method B<new> OCSURL, USER, PASSWD [, <SOAP::Lite arguments>]
+=head3 B<new> OCSURL, USER, PASSWD [, <SOAP::Lite arguments>]
 
 The OCS::Client constructor requires three arguments. OCSURL is OCS's
 base URL from which will be constructed it's SOAP URL. USER and PASSWD
@@ -67,7 +70,7 @@ sub new {
     return bless $self, $class;
 }
 
-=method B<get_computers_V1> REQUEST-MAP
+=head3 B<get_computers_V1> REQUEST-MAP
 
 This method allows for querying inventoried computers.
 
@@ -124,7 +127,7 @@ sub get_computers_V1 {
     return map {XMLin($_, ForceArray => [qw/DRIVES NETWORKS PRINTERS SOFTWARES VIDEOS/])} @computers;
 }
 
-=method B<computer_iterator> REQUEST-LIST
+=head3 B<computer_iterator> REQUEST-LIST
 
 This method returns a closure that you can use to fetch the computers
 one by one until there is no more. It's usefull because the server
@@ -171,7 +174,7 @@ our %fields = (
     22 => 'Office Tag',
 );
 
-=method B<prune> COMPUTER
+=head3 B<prune> COMPUTER
 
 This class method gets a COMPUTER description, as returned by the
 get_computer_V1 method, and simplifies it by deleting and converting
@@ -188,8 +191,8 @@ uninportant to track.
 Note that it tries to convert the custom field names by using the
 OCS::Client::fields hash. This hash contains by default, the custom
 field names of my company's OCS instance. You should redefine it in
-your script if you intend to use this method. (The source be with you,
-Luke!)
+your script if you intend to use this method. (May the source be with
+you, Luke!)
 
 =cut
 
