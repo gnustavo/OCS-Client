@@ -81,8 +81,8 @@ to the following default list:
 
     engine     => 'FIRST',
     asking_for => 'INVENTORY',
-    checksum   => '131071',
-    wanted     => '000003',
+    checksum   => 0x01FFFF,
+    wanted     => 0x000003,
     offset     => 0,
 
 The complete list is used to initialize a hash from which the XML
@@ -101,8 +101,8 @@ sub get_computers_V1 {
     my %request = (
 	engine     => 'FIRST',
 	asking_for => 'INVENTORY',
-	checksum   => '131071',
-	wanted     => '000003',
+	checksum   => 0x01FFFF,
+	wanted     => 0x000003,
 	offset     => 0,
 	@_,
     );
@@ -248,5 +248,87 @@ sub prune {
 
     return $computer;
 }
+
+=head2 Constants
+
+This module defines some constants to make the calling of methods
+B<get_computers_V1> and B<computer_iterator> easier and more readable.
+
+These are for their CHECKSUM parameter.
+
+=over 4
+
+=item HARDWARE            => 0x00001
+
+=item BIOS                => 0x00002
+
+=item MEMORY_SLOTS        => 0x00004
+
+=item SYSTEM_SLOTS        => 0x00008
+
+=item REGISTRY            => 0x00010
+
+=item SYSTEM_CONTROLLERS  => 0x00020
+
+=item MONITORS            => 0x00040
+
+=item SYSTEM_PORTS        => 0x00080
+
+=item STORAGE_PERIPHERALS => 0x00100
+
+=item LOGICAL_DRIVES      => 0x00200
+
+=item INPUT_DEVICES       => 0x00400
+
+=item MODEMS              => 0x00800
+
+=item NETWORK_ADAPTERS    => 0x01000
+
+=item PRINTERS            => 0x02000
+
+=item SOUND_ADAPTERS      => 0x04000
+
+=item VIDEO_ADAPTERS      => 0x08000
+
+=item SOFTWARE            => 0x10000
+
+=back
+
+And these are for their WANTED parameter.
+
+=over 4
+
+=item ACOUNTINFO          => 0x00001
+
+=item DICO_SOFT           => 0x00002
+
+=back
+
+=cut
+
+use constant {
+    # CHECKSUM constants
+    'HARDWARE'            => 0x00001,
+    'BIOS'                => 0x00002,
+    'MEMORY_SLOTS'        => 0x00004,
+    'SYSTEM_SLOTS'        => 0x00008,
+    'REGISTRY'            => 0x00010,
+    'SYSTEM_CONTROLLERS'  => 0x00020,
+    'MONITORS'            => 0x00040,
+    'SYSTEM_PORTS'        => 0x00080,
+    'STORAGE_PERIPHERALS' => 0x00100,
+    'LOGICAL_DRIVES'      => 0x00200,
+    'INPUT_DEVICES'       => 0x00400,
+    'MODEMS'              => 0x00800,
+    'NETWORK_ADAPTERS'    => 0x01000,
+    'PRINTERS'            => 0x02000,
+    'SOUND_ADAPTERS'      => 0x04000,
+    'VIDEO_ADAPTERS'      => 0x08000,
+    'SOFTWARE'            => 0x10000,
+
+    # WANTED constants
+    'ACOUNTINFO'          => 0x00001,
+    'DICO_SOFT'           => 0x00002,
+};
 
 1; # End of OCS::Client
