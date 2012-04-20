@@ -217,6 +217,7 @@ sub prune {
     if (exists $computer->{DRIVES}) {
 	foreach my $drive (@{$computer->{DRIVES}}) {
 	    $drive->{ORDER} = (ref $drive->{VOLUMN} ? '' : $drive->{VOLUMN}) . (ref $drive->{LETTER} ? '' : $drive->{LETTER});
+	    $drive->{ORDER} =~ s@:/$@:@;
 	    delete @{$drive}{qw/CREATEDATE FREE LETTER NUMFILES VOLUMN/};
 	}
 	$computer->{DRIVES} = [sort {$a->{ORDER} cmp $b->{ORDER}} grep {$_->{TYPE} !~ /removable/i} @{$computer->{DRIVES}}];
