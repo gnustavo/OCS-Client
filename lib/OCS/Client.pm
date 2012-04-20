@@ -234,12 +234,14 @@ sub prune {
 	}
     }
 
-    $computer->{PRINTERS} = [sort {$a->{NAME} cmp $b->{NAME}} @{$computer->{PRINTERS}}]
-	if exists $computer->{PRINTERS};
+    if (exists $computer->{PRINTERS}) {
+	$computer->{PRINTERS} = [sort {$a->{NAME} cmp $b->{NAME}} @{$computer->{PRINTERS}}];
+    }
 
     # Of the software we only keep the name and the version
-    $computer->{SOFTWARES} = {map {($_->{NAME} => $_->{VERSION})} @{$computer->{SOFTWARES}}}
-	if exists $computer->{SOFTWARES};
+    if (exists $computer->{SOFTWARES}) {
+	$computer->{SOFTWARES} = {map {($_->{NAME} => $_->{VERSION})} @{$computer->{SOFTWARES}}};
+    }
 
     if (exists $computer->{STORAGES}) {
 	$computer->{STORAGES} = [grep {$_->{TYPE} !~ /removable/i} @{$computer->{STORAGES}}];
