@@ -241,6 +241,10 @@ sub prune {
     $computer->{SOFTWARES} = {map {($_->{NAME} => $_->{VERSION})} @{$computer->{SOFTWARES}}}
 	if exists $computer->{SOFTWARES};
 
+    if (exists $computer->{STORAGES}) {
+	$computer->{STORAGES} = [grep {$_->{TYPE} !~ /removable/i} @{$computer->{STORAGES}}];
+    }
+
     if (exists $computer->{VIDEOS}) {
 	foreach my $video (@{$computer->{VIDEOS}}) {
 	    delete @{$video}{qw/RESOLUTION/};
