@@ -2,6 +2,10 @@ Revision history for OCS-Client. -*- text -*-
 
 {{$NEXT}}
 
+0.007     2012-04-21 18:08:31 America/Sao_Paulo
+
+	Add a custom READ file to be shown in GitHub.
+
 0.006     2012-04-20 22:55:50 America/Sao_Paulo
 
 	Add the examples/ocssvn.pl script.
