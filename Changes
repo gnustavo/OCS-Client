@@ -2,6 +2,10 @@ Revision history for OCS-Client. -*- text -*-
 
 {{$NEXT}}
 
+0.009     2012-04-24 08:07:42 America/Sao_Paulo
+
+	The HARDWARE section doesn't need to be forced into an array.
+
 0.008     2012-04-24 07:51:21 America/Sao_Paulo
 
 	ForceArray to all prunnable sections.
