@@ -124,7 +124,7 @@ sub get_computers_V1 {
     shift @computers;
     pop   @computers;
 
-    return map {XMLin($_, ForceArray => [qw/DRIVES NETWORKS PRINTERS SOFTWARES VIDEOS/])} @computers;
+    return map {XMLin($_, ForceArray => [qw/DRIVES HARDWARE NETWORKS PRINTERS SOFTWARES STORAGES VIDEOS/])} @computers;
 }
 
 =head3 B<computer_iterator> REQUEST-MAP
