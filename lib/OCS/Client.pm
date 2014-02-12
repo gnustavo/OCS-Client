@@ -172,6 +172,7 @@ our %fields = (
     20 => 'UA Username',
     21 => 'Office',
     22 => 'Office Tag',
+    23 => 'PA',
 );
 
 =head3 B<prune> COMPUTER
