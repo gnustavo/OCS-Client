@@ -204,7 +204,11 @@ sub prune {
 	my %myinfo;
 	foreach my $info (grep {exists $_->{content}} @$accountinfo) {
 	    if ($info->{Name} =~ /^fields_(\d+)$/) {
-		$myinfo{$fields{$1}} = $info->{content};
+                if (exists $fields{$1}) {
+                    $myinfo{$fields{$1}} = $info->{content};
+                } else {
+                    warn "Skipping unknown ACCOUNTINFO field id: $1";
+                }
 	    } else {
 		$myinfo{$info->{Name}} = $info->{content};
 	    }
