@@ -173,6 +173,8 @@ our %fields = (
     21 => 'Office',
     22 => 'Office Tag',
     23 => 'PA',
+    26 => 'Diretoria',
+    27 => 'Nota Fiscal',
 );
 
 =head3 B<prune> COMPUTER
