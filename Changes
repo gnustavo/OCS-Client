@@ -2,6 +2,17 @@ Revision history for OCS-Client. -*- text -*-
 
 {{$NEXT}}
 
+0.010     2014-06-11 08:15:05-03:00 America/Sao_Paulo
+
+[Changes]
+
+- Add fields: 'PA', 'Diretoria', and 'Nota Fiscal'.
+
+[Fixes]
+
+- Check if a field is known before using it.
+
+
 0.009     2012-04-24 08:07:42 America/Sao_Paulo
 
 	The HARDWARE section doesn't need to be forced into an array.
