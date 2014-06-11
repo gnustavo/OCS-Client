@@ -1,3 +1,5 @@
+## no critic (Modules::RequireExplicitPackage)
+
 use utf8;
 use strict;
 use warnings;
@@ -97,14 +99,14 @@ function.
 =cut
 
 sub get_computers_V1 {
-    my $self = shift;
+    my ($self, @args) = @_;
     my %request = (
 	engine     => 'FIRST',
 	asking_for => 'INVENTORY',
 	checksum   => 0x01FFFF,
 	wanted     => 0x000003,
 	offset     => 0,
-	@_,
+	@args,
     );
 
     my $request = "<REQUEST>\n";
@@ -295,7 +297,7 @@ And these are for their WANTED parameter.
 
 =cut
 
-use constant {
+use constant {                  ## no critic (ValuesAndExpressions::ProhibitConstantPragma)
     # CHECKSUM constants
     'HARDWARE'            => 0x00001,
     'BIOS'                => 0x00002,
