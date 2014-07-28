@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 package OCS::Client;
-# ABSTRACT: A simple interface to OCS's SOAP API
+# ABSTRACT: simple interface to OCS's SOAP API
 
 use Carp;
 use URI;
