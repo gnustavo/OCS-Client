@@ -323,3 +323,7 @@ use constant {                  ## no critic (ValuesAndExpressions::ProhibitCons
 };
 
 1; # End of OCS::Client
+
+=head1 REPOSITORY
+
+L<https://github.com/gnustavo/OCS-Client>
