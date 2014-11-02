@@ -1,12 +1,11 @@
 ## no critic (Modules::RequireExplicitPackage)
 
-use utf8;
-use strict;
-use warnings;
-
 package OCS::Client;
 # ABSTRACT: simple interface to OCS's SOAP API
 
+use utf8;
+use strict;
+use warnings;
 use Carp;
 use URI;
 use SOAP::Lite;
@@ -117,7 +116,7 @@ sub get_computers_V1 {
 
     my $som = $self->{soap}->get_computers_V1($request);
 
-    die "ERROR: ", XML::Entities::decode('all', $som->fault->{faultstring})
+    croak "ERROR: ", XML::Entities::decode('all', $som->fault->{faultstring})
 	if $som->fault;
 
     my @computers = $som->paramsall;
@@ -154,7 +153,7 @@ sub computer_iterator {
 
 # This hash is used to map OCS custom field ids (in the form
 # "fields_N") into their names.
-our %fields = (
+my %fields = (
     3 => 'UA',
     4 => 'Sala',
     5 => 'Nome do Usuário',
@@ -212,7 +211,7 @@ sub prune {
                 if (exists $fields{$1}) {
                     $myinfo{$fields{$1}} = $info->{content};
                 } else {
-                    warn "Skipping unknown ACCOUNTINFO field id: $1";
+                    carp "Skipping unknown ACCOUNTINFO field id: $1";
                 }
 	    } else {
 		$myinfo{$info->{Name}} = $info->{content};
