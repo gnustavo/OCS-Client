@@ -2,16 +2,21 @@ Revision history for OCS-Client. -*- text -*-
 
 {{$NEXT}}
 
+0.011     2014-11-02 17:16:09 America/Sao_Paulo
+
+        [Changes]
+
+        - Add field 'HW Guidelines'.
+
 0.010     2014-06-11 08:15:05-03:00 America/Sao_Paulo
 
-[Changes]
+        [Changes]
 
-- Add fields: 'PA', 'Diretoria', and 'Nota Fiscal'.
+        - Add fields: 'PA', 'Diretoria', and 'Nota Fiscal'.
 
-[Fixes]
+        [Fixes]
 
-- Check if a field is known before using it.
-
+        - Check if a field is known before using it.
 
 0.009     2012-04-24 08:07:42 America/Sao_Paulo
 
