@@ -174,6 +174,7 @@ my %fields = (
     21 => 'Office',
     22 => 'Office Tag',
     23 => 'PA',
+    25 => 'Nagios',
     26 => 'Diretoria',
     27 => 'Nota Fiscal',
     28 => 'HW Guidelines',
