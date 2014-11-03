@@ -212,7 +212,7 @@ sub prune {
                 if (exists $fields{$1}) {
                     $myinfo{$fields{$1}} = $info->{content};
                 } else {
-                    carp "Skipping unknown ACCOUNTINFO field id: $1";
+                    carp "Skipping unknown ACCOUNTINFO field for $key: ($info->{Name} => $info->{content})";
                 }
 	    } else {
 		$myinfo{$info->{Name}} = $info->{content};
