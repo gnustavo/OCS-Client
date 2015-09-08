@@ -178,6 +178,7 @@ my %fields = (
     26 => 'Diretoria',
     27 => 'Nota Fiscal',
     28 => 'HW Guidelines',
+    29 => 'Físico/Virtual',
 );
 
 =head3 B<prune> COMPUTER
