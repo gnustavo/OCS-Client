@@ -23,9 +23,16 @@ use XML::Simple;
       checksum => OCS::Client::HARDWARE | OCS::Client::SOFTWARE,
   );
 
+  %OCS::Client::ACCOUNT_INFO = (
+    3  => 'UA',
+    4  => 'Room',
+    5  => 'Onwner',
+  );
+
   my $next_computer = $ocs->computer_iterator(asking_for => 'META');
   while (my $meta = $next_computer->()) {
       # ...
+      my $description = OCS::Client::prune($meta);
   }
 
 =head1 DESCRIPTION
@@ -37,6 +44,27 @@ This module implements a thin Object Oriented wrapper around OCS's
 SOAP API, which is somewhat specified in
 L<http://wiki.ocsinventory-ng.org/index.php/Developers:Web_services>.
 (This version is known to work against OCS 2.0.1.)
+
+=head2 VARIABLES
+
+=head3 B<%ACCOUNT_INFO>
+
+The B<get_computers_V1> method returns administrative information about each
+computer in the ACCOUNTINFO tag. This information is specific to the OCS
+instance. Unfortunately there's no way to grok this information
+programatically from the server, but you may register the mapping from the
+ACCOUNTINFO_ID to a descriptive name directly in this hash.
+
+You can see which administrative information is registered in the server by
+going to its web interface, clicking the 'Administrative Data' icon and the
+'download' link to download a CSV file containing the name ('Wording'
+column) and ID ('MODIF' column) of every information.
+
+This information is used by the B<prune> method below.
+
+=cut
+
+our %ACCOUNT_INFO;
 
 =head2 METHODS
 
@@ -151,36 +179,6 @@ sub computer_iterator {
     };
 }
 
-# This hash is used to map OCS custom field ids (in the form
-# "fields_N") into their names.
-my %fields = (
-    3 => 'UA',
-    4 => 'Sala',
-    5 => 'Nome do Usuário',
-    6 => 'Atividade',
-    7 => 'Nome da Empresa',
-    8 => 'Ponto de Rede',
-    9 => 'Switch',
-    10 => 'Porta',
-    11 => 'Status',
-    13 => 'Observações',
-    14 => 'Local do Ponto',
-    15 => 'Asset Number',
-    16 => 'Responsável',
-    17 => 'Tipo',
-    18 => 'Padrão de HW',
-    19 => 'Data de Aquisição',
-    20 => 'UA Username',
-    21 => 'Office',
-    22 => 'Office Tag',
-    23 => 'PA',
-    25 => 'Nagios',
-    26 => 'Diretoria',
-    27 => 'Nota Fiscal',
-    28 => 'HW Guidelines',
-    29 => 'Físico/Virtual',
-);
-
 =head3 B<prune> COMPUTER
 
 This class method gets a COMPUTER description, as returned by the
@@ -196,10 +194,7 @@ there were lots of frequently changing information that was
 uninportant to track.
 
 Note that it tries to convert the custom field names by using the
-OCS::Client::fields hash. This hash contains by default, the custom
-field names of my company's OCS instance. You should redefine it in
-your script if you intend to use this method. (May the source be with
-you, Luke!)
+B<%ACCOUNT_INFO> hash.
 
 =cut
 
@@ -210,8 +205,8 @@ sub prune {
 	my %myinfo;
 	foreach my $info (grep {exists $_->{content}} @$accountinfo) {
 	    if ($info->{Name} =~ /^fields_(\d+)$/) {
-                if (exists $fields{$1}) {
-                    $myinfo{$fields{$1}} = $info->{content};
+                if (exists $ACCOUNT_INFO{$1}) {
+                    $myinfo{$ACCOUNT_INFO{$1}} = $info->{content};
                 } else {
                     carp "Skipping unknown ACCOUNTINFO field for $key: ($info->{Name} => $info->{content})";
                 }
