@@ -2,6 +2,13 @@ Revision history for OCS-Client. -*- text -*-
 
 {{$NEXT}}
 
+0.013     2016-10-09 11:15:28-03:00 America/Sao_Paulo
+
+        [Changes]
+
+        - The new global hash %OCS::Client::ACCOUNT_INFO may be used to
+          register the server's specific administrative data.
+
 0.012     2015-09-08 08:57:48-03:00 America/Sao_Paulo
 
 0.011     2014-11-02 17:16:09 America/Sao_Paulo
